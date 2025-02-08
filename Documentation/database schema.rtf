@@ -1,0 +1,59 @@
+/*krijimi i databazes qe do mbaje tabelat*/
+CREATE DATABASE caloriescalculatorapp;
+
+/* krijimi i tabeles Users*/
+CREATE TABLE users(
+    user_id int NOT NULL AUTO_INCREMENT,
+    user_name varchar(20) NOT NULL,
+    email varchar(50) NOT NULL UNIQUE,
+    password varchar(100) NOT NULL,
+    role ENUM('user', 'admin') DEFAULT 'user',
+    hasExceededMoneyLimit tinyint(1) DEFAULT 0,
+    PRIMARY KEY(user_id)
+);
+
+/*Krijimi i tabeles se ushqimeve per cdo user specifik*/
+CREATE TABLE user_foods(
+    user_food_id INT NOT NULL AUTO_INCREMENT,
+    user_id INT NOT NULL,
+    food_name VARCHAR(30) NOT NULL,
+    calorie_value DECIMAL(10,2) NOT NULL,
+    food_price DECIMAL(10,2) NOT NULL,
+    date_consumed DATE NOT NULL,
+    PRIMARY KEY(user_food_id),
+    FOREIGN KEY(user_id) REFERENCES users(user_id) ON DELETE CASCADE
+);
+
+/* krijimi i tabeles qe do mbaje raportin statistikor javor per cdo perdorues*/
+CREATE TABLE weekly_summary_report(
+    report_id INT NOT NULL AUTO_INCREMENT,
+    user_id INT NOT NULL,
+    week_start_date DATE NOT NULL,
+    total_calories_consumed DECIMAL(10,2) NOT NULL,
+    days_above_threshold INT NOT NULL,
+    total_expenditure DECIMAL(10,2)  NOT NULL,
+    PRIMARY KEY(report_id),
+    FOREIGN KEY(user_id) REFERENCES users(user_id) ON DELETE CASCADE
+);
+
+/* krijimi i tabeles notifications qe do te dergoje mesazhet kur kalohet limitet */
+CREATE TABLE notifications(
+    notification_id INT NOT NULL AUTO_INCREMENT,
+    user_id INT NOT NULL,
+    message TEXT NOT NULL,
+    date_sent TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    is_read BOOLEAN DEFAULT FALSE,
+    PRIMARY KEY (notification_id),
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
+);
+
+
+
+
+
+/* shembull: mbushja e tabeles se user-ave me rol admin */
+INSERT INTO users (user_name, email, password, role) VALUES ('admin', 'admintest@gmail.com', 'adminCCA', 'admin');
+
+
+/* shtimi i kolones booleane exceededMoneyLimit per cdo user */
+ALTER TABLE users ADD COLUMN hasExceededMoneyLimit BOOLEAN DEFAULT FALSE;

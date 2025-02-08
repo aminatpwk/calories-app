@@ -1,0 +1,27 @@
+#usersTable .table-cell {
+    -fx-alignment: CENTER;
+    -fx-font-size: 14px;
+    -fx-text-fill: black;
+}
+
+
+.table-row-cell {
+    -fx-border-color: #dcdcdc;
+    -fx-border-width: 1px;
+}
+
+
+.table-cell {
+    -fx-border-color: #dcdcdc;
+    -fx-padding: 5px;
+}
+
+
+#usersTable .column-header {
+    -fx-border-color: gray;
+    -fx-alignment: center;
+    -fx-background-color: #85b48a;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
