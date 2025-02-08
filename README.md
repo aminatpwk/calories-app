@@ -8,7 +8,7 @@ This project was a uni assignment worked by:
 ## Installation
 
 ```bash
-git clone "https://github.com/melinashehu/Calories-Calculation-Application.git"
+git clone "https://github.com/aminatpwk/calories-app.git"
 ```
 Execute Start.java to start the app.
 
